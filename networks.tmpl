@@ -1,0 +1,33 @@
+{{.Warning}}
+// Generated {{.Now}}
+
+package privateNetworks
+
+import (
+	"net"
+)
+
+var (
+  V4 = []Network{
+{{range .V4Networks}}    {
+      CIDR: net.IPNet{
+        IP: []byte{ {{.IP}} },
+        Mask: []byte{ {{.Mask}} },
+      },
+      Comment: {{.Comment}},
+      RFC: {{.RFC}},
+    },
+{{end}}
+  }
+  V6 = []net.IPNet{
+{{range .V6Networks}}    {
+      CIDR: net.IPNet{
+        IP: []byte{ {{.IP}} },
+        Mask: []byte{ {{.Mask}} },
+      },
+      Comment: {{.Comment}},
+      RFC: {{.RFC}},
+    },
+{{end}}
+  }
+)
