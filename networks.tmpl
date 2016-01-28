@@ -19,7 +19,7 @@ var (
     },
 {{end}}
   }
-  V6 = []net.IPNet{
+  V6 = []Network{
 {{range .V6Networks}}    {
       CIDR: net.IPNet{
         IP: []byte{ {{.IP}} },

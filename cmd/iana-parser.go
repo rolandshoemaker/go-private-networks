@@ -35,6 +35,7 @@ var commentStrip = regexp.MustCompile(`\[\d+\]$`)
 func stripString(input string) string {
 	input = commentStrip.ReplaceAllLiteralString(input, "")
 	input = strings.Replace(input, `"`, "", -1)
+	input = strings.Replace(input, "\n", "", -1)
 	return input
 }
 

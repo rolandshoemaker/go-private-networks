@@ -1,6 +1,6 @@
 // DO NOT EDIT BY HAND
 // CODE AUTOMATICALLY GENERATED USING cmd/iana-parser.go
-// Generated 2016-01-28 23:24:52.766585666 +0000 UTC
+// Generated 2016-01-28 23:29:26.044834142 +0000 UTC
 
 package privateNetworks
 
@@ -196,7 +196,7 @@ var (
     },
 
   }
-  V6 = []net.IPNet{
+  V6 = []Network{
     {
       CIDR: net.IPNet{
         IP: []byte{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },
@@ -290,8 +290,7 @@ var (
         IP: []byte{ 32,1,0,5,0,0,0,0,0,0,0,0,0,0,0,0 },
         Mask: []byte{ 255,255,255,255,0,0,0,0,0,0,0,0,0,0,0,0 },
       },
-      Comment: "EID Space for LISP (TEMPORARY - registered 2015-10-22, expires 
-      2016-10-22)",
+      Comment: "EID Space for LISP (TEMPORARY - registered 2015-10-22, expires       2016-10-22)",
       RFC: "[draft-ietf-lisp-eid-block]",
     },
     {
