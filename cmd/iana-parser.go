@@ -31,6 +31,13 @@ func bytesToString(bytes []byte) string {
 
 var commentStrip = regexp.MustCompile(`\[\d+\]$`)
 
+// deal with some annoyances of the format
+func stripString(input string) string {
+	input = commentStrip.ReplaceAllLiteralString(input, "")
+	input = strings.Replace(input, `"`, "", -1)
+	return input
+}
+
 func readCSV(reader *csv.Reader) []network {
 	networks := []network{}
 	records, err := reader.ReadAll()
@@ -44,8 +51,8 @@ func readCSV(reader *csv.Reader) []network {
 		}
 		// record structure
 		// Address Block, Name, RFC, Allocation Date, Termination Date, Source, Destination, Forwardable, Global, Reserved-by-Protocol
-		for _, block := range strings.Split(r[0], ",") {
-			block = commentStrip.ReplaceAllLiteralString(block, "")
+		// (sometimes, maybe once, there is an entry with two seperate blocks)
+		for _, block := range strings.Split(stripString(r[0]), ",") {
 			block = strings.Trim(block, " ")
 			_, cidr, err := net.ParseCIDR(block)
 			if err != nil {
@@ -54,8 +61,8 @@ func readCSV(reader *csv.Reader) []network {
 			}
 			ip, mask := bytesToString(cidr.IP), bytesToString(cidr.Mask)
 			networks = append(networks, network{
-				Comment: r[1],
-				RFC:     r[2],
+				Comment: stripString(r[1]),
+				RFC:     stripString(r[2]),
 				Block:   block,
 				IP:      ip,
 				Mask:    mask,
