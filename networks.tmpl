@@ -5,6 +5,7 @@ package privateNetworks
 
 import (
 	"net"
+  "time"
 )
 
 var (
@@ -16,7 +17,9 @@ var (
       },
       Comment: "{{.Comment}}",
       RFC: "{{.RFC}}",
-      Source: {{.Source}},
+{{if .Allocated}}      Allocated: &time.Unix({{.Allocated}}),
+{{end}}{{if .Terminates}}      Terminates: &time.Unix({{.Terminates}}),
+{{end}}      Source: {{.Source}},
       Destination: {{.Destination}},
       Forwardable: {{.Forwardable}},
       Global: {{.Global}},

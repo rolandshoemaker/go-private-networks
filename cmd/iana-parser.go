@@ -19,6 +19,8 @@ type network struct {
 	Block              string
 	IP                 string
 	Mask               string
+	Allocated          string
+	Terminates         string
 	Source             string
 	Destination        string
 	Forwardable        string
@@ -55,6 +57,8 @@ func parseBool(input string) (bool, error) {
 	}
 }
 
+var dateFormat = "2006-01"
+
 func readCSV(reader *csv.Reader) []network {
 	networks := []network{}
 	records, err := reader.ReadAll()
@@ -77,6 +81,17 @@ func readCSV(reader *csv.Reader) []network {
 				continue
 			}
 			ip, mask := bytesToString(cidr.IP), bytesToString(cidr.Mask)
+			allocated, terminates := "", ""
+			if r[3] != "" {
+				if t, err := time.Parse(dateFormat, r[3]); err == nil {
+					allocated = fmt.Sprintf("%d, %d", t.Unix(), t.UnixNano())
+				}
+			}
+			if r[4] != "" {
+				if t, err := time.Parse(dateFormat, r[4]); err == nil {
+					terminates = fmt.Sprintf("%d, %d", t.Unix(), t.UnixNano())
+				}
+			}
 			attrs := make([]string, 5)
 			for i, attr := range r[5:] {
 				attrs[i] = strings.ToLower(stripString(attr))
@@ -90,6 +105,8 @@ func readCSV(reader *csv.Reader) []network {
 				Block:              block,
 				IP:                 ip,
 				Mask:               mask,
+				Allocated:          allocated,
+				Terminates:         terminates,
 				Source:             attrs[0],
 				Destination:        attrs[1],
 				Forwardable:        attrs[2],
