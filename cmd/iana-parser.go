@@ -14,11 +14,16 @@ import (
 )
 
 type network struct {
-	Comment string
-	RFC     string
-	Block   string
-	IP      string
-	Mask    string
+	Comment            string
+	RFC                string
+	Block              string
+	IP                 string
+	Mask               string
+	Source             string
+	Destination        string
+	Forwardable        string
+	Global             string
+	ReservedByProtocol string
 }
 
 func bytesToString(bytes []byte) string {
@@ -37,6 +42,17 @@ func stripString(input string) string {
 	input = strings.Replace(input, `"`, "", -1)
 	input = strings.Replace(input, "\n", "", -1)
 	return input
+}
+
+func parseBool(input string) (bool, error) {
+	switch strings.ToLower(input) {
+	case "true":
+		return true, nil
+	case "false":
+		return false, nil
+	default:
+		return false, fmt.Errorf("String is not a bool")
+	}
 }
 
 func readCSV(reader *csv.Reader) []network {
@@ -61,12 +77,24 @@ func readCSV(reader *csv.Reader) []network {
 				continue
 			}
 			ip, mask := bytesToString(cidr.IP), bytesToString(cidr.Mask)
+			attrs := make([]string, 5)
+			for i, attr := range r[5:] {
+				attrs[i] = strings.ToLower(stripString(attr))
+				if attrs[i] == "" || attrs[i] == "n/a" {
+					attrs[i] = "false"
+				}
+			}
 			networks = append(networks, network{
-				Comment: stripString(r[1]),
-				RFC:     stripString(r[2]),
-				Block:   block,
-				IP:      ip,
-				Mask:    mask,
+				Comment:            stripString(r[1]),
+				RFC:                stripString(r[2]),
+				Block:              block,
+				IP:                 ip,
+				Mask:               mask,
+				Source:             attrs[0],
+				Destination:        attrs[1],
+				Forwardable:        attrs[2],
+				Global:             attrs[3],
+				ReservedByProtocol: attrs[4],
 			})
 		}
 	}

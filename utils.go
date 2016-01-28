@@ -18,5 +18,5 @@ type Network struct {
 	Destination        bool
 	Forwardable        bool
 	Global             bool
-	ReservedbyProtocol bool
+	ReservedByProtocol bool
 }

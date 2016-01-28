@@ -1,6 +1,6 @@
 // DO NOT EDIT BY HAND
 // CODE AUTOMATICALLY GENERATED USING cmd/iana-parser.go
-// Generated 2016-01-28 23:29:26.044834142 +0000 UTC
+// Generated 2016-01-28 23:42:43.732650532 +0000 UTC
 
 package privateNetworks
 
@@ -17,6 +17,11 @@ var (
       },
       Comment: "This host on this network",
       RFC: "[RFC1122], section 3.2.1.3",
+      Source: true,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: true,
     },
     {
       CIDR: net.IPNet{
@@ -25,6 +30,11 @@ var (
       },
       Comment: "Private-Use",
       RFC: "[RFC1918]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -33,6 +43,11 @@ var (
       },
       Comment: "Shared Address Space",
       RFC: "[RFC6598]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -41,6 +56,11 @@ var (
       },
       Comment: "Loopback",
       RFC: "[RFC1122], section 3.2.1.3",
+      Source: false,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: true,
     },
     {
       CIDR: net.IPNet{
@@ -49,6 +69,11 @@ var (
       },
       Comment: "Link Local",
       RFC: "[RFC3927]",
+      Source: true,
+      Destination: true,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: true,
     },
     {
       CIDR: net.IPNet{
@@ -57,6 +82,11 @@ var (
       },
       Comment: "Private-Use",
       RFC: "[RFC1918]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -65,6 +95,11 @@ var (
       },
       Comment: "IETF Protocol Assignments",
       RFC: "[RFC6890], section 2.1",
+      Source: false,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -73,6 +108,11 @@ var (
       },
       Comment: "IPv4 Service Continuity Prefix",
       RFC: "[RFC7335]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -81,6 +121,11 @@ var (
       },
       Comment: "IPv4 dummy address",
       RFC: "[RFC7600]",
+      Source: true,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -89,6 +134,11 @@ var (
       },
       Comment: "Port Control Protocol Anycast",
       RFC: "[RFC7723]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: true,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -97,6 +147,11 @@ var (
       },
       Comment: "NAT64/DNS64 Discovery",
       RFC: "[RFC7050], section 2.2",
+      Source: false,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: true,
     },
     {
       CIDR: net.IPNet{
@@ -105,6 +160,11 @@ var (
       },
       Comment: "NAT64/DNS64 Discovery",
       RFC: "[RFC7050], section 2.2",
+      Source: false,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: true,
     },
     {
       CIDR: net.IPNet{
@@ -113,6 +173,11 @@ var (
       },
       Comment: "Documentation (TEST-NET-1)",
       RFC: "[RFC5737]",
+      Source: false,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -121,6 +186,11 @@ var (
       },
       Comment: "AS112-v4",
       RFC: "[RFC7535]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: true,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -129,6 +199,11 @@ var (
       },
       Comment: "AMT",
       RFC: "[RFC7450]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: true,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -137,6 +212,11 @@ var (
       },
       Comment: "Deprecated (6to4 Relay Anycast)",
       RFC: "[RFC7526]",
+      Source: false,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -145,6 +225,11 @@ var (
       },
       Comment: "Private-Use",
       RFC: "[RFC1918]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -153,6 +238,11 @@ var (
       },
       Comment: "Direct Delegation AS112 Service",
       RFC: "[RFC7534]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: true,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -161,6 +251,11 @@ var (
       },
       Comment: "Benchmarking",
       RFC: "[RFC2544]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -169,6 +264,11 @@ var (
       },
       Comment: "Documentation (TEST-NET-2)",
       RFC: "[RFC5737]",
+      Source: false,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -177,6 +277,11 @@ var (
       },
       Comment: "Documentation (TEST-NET-3)",
       RFC: "[RFC5737]",
+      Source: false,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -185,6 +290,11 @@ var (
       },
       Comment: "Reserved",
       RFC: "[RFC1112], section 4",
+      Source: false,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: true,
     },
     {
       CIDR: net.IPNet{
@@ -193,6 +303,11 @@ var (
       },
       Comment: "Limited Broadcast",
       RFC: "[RFC919], section 7",
+      Source: false,
+      Destination: true,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: false,
     },
 
   }
@@ -204,6 +319,11 @@ var (
       },
       Comment: "Loopback Address",
       RFC: "[RFC4291]",
+      Source: false,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: true,
     },
     {
       CIDR: net.IPNet{
@@ -212,6 +332,11 @@ var (
       },
       Comment: "Unspecified Address",
       RFC: "[RFC4291]",
+      Source: true,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: true,
     },
     {
       CIDR: net.IPNet{
@@ -220,6 +345,11 @@ var (
       },
       Comment: "IPv4-mapped Address",
       RFC: "[RFC4291]",
+      Source: false,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: true,
     },
     {
       CIDR: net.IPNet{
@@ -228,6 +358,11 @@ var (
       },
       Comment: "IPv4-IPv6 Translat.",
       RFC: "[RFC6052]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: true,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -236,6 +371,11 @@ var (
       },
       Comment: "Discard-Only Address Block",
       RFC: "[RFC6666]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -244,6 +384,11 @@ var (
       },
       Comment: "IETF Protocol Assignments",
       RFC: "[RFC2928]",
+      Source: false,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -252,6 +397,11 @@ var (
       },
       Comment: "TEREDO",
       RFC: "[RFC4380]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -260,6 +410,11 @@ var (
       },
       Comment: "Port Control Protocol Anycast",
       RFC: "[RFC7723]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: true,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -268,6 +423,11 @@ var (
       },
       Comment: "Benchmarking",
       RFC: "[RFC5180]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -276,6 +436,11 @@ var (
       },
       Comment: "AMT",
       RFC: "[RFC7450]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: true,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -284,6 +449,11 @@ var (
       },
       Comment: "AS112-v6",
       RFC: "[RFC7535]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: true,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -292,6 +462,11 @@ var (
       },
       Comment: "EID Space for LISP (TEMPORARY - registered 2015-10-22, expires       2016-10-22)",
       RFC: "[draft-ietf-lisp-eid-block]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: true,
+      ReservedByProtocol: true,
     },
     {
       CIDR: net.IPNet{
@@ -300,6 +475,11 @@ var (
       },
       Comment: "Deprecated (previously ORCHID)",
       RFC: "[RFC4843]",
+      Source: false,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -308,6 +488,11 @@ var (
       },
       Comment: "ORCHIDv2",
       RFC: "[RFC7343]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: true,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -316,6 +501,11 @@ var (
       },
       Comment: "Documentation",
       RFC: "[RFC3849]",
+      Source: false,
+      Destination: false,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -324,6 +514,11 @@ var (
       },
       Comment: "6to4",
       RFC: "[RFC3056]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -332,6 +527,11 @@ var (
       },
       Comment: "Direct Delegation AS112 Service",
       RFC: "[RFC7534]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: true,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -340,6 +540,11 @@ var (
       },
       Comment: "Unique-Local",
       RFC: "[RFC4193]",
+      Source: true,
+      Destination: true,
+      Forwardable: true,
+      Global: false,
+      ReservedByProtocol: false,
     },
     {
       CIDR: net.IPNet{
@@ -348,6 +553,11 @@ var (
       },
       Comment: "Linked-Scoped Unicast",
       RFC: "[RFC4291]",
+      Source: true,
+      Destination: true,
+      Forwardable: false,
+      Global: false,
+      ReservedByProtocol: true,
     },
 
   }
