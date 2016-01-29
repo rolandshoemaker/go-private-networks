@@ -1,11 +1,11 @@
 // DO NOT EDIT BY HAND
 // CODE AUTOMATICALLY GENERATED USING cmd/iana-parser.go
-// Generated 2016-01-29 00:13:38.25577707 +0000 UTC
+// Generated 2016-01-29 00:36:42.61723236 +0000 UTC
 
-package privateNetworks
+package specialNetworks
 
 import (
-	"net"
+  "net"
   "time"
 )
 
