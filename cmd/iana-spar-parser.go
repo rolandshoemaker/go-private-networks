@@ -1,11 +1,12 @@
 package main
 
 import (
-	"bytes"
 	"encoding/csv"
+	"flag"
 	"fmt"
 	"net"
 	"os"
+	"os/exec"
 	"regexp"
 	"strconv"
 	"strings"
@@ -46,20 +47,23 @@ func stripString(input string) string {
 	return input
 }
 
-func parseBool(input string) (bool, error) {
-	switch strings.ToLower(input) {
-	case "true":
-		return true, nil
-	case "false":
-		return false, nil
-	default:
-		return false, fmt.Errorf("String is not a bool")
-	}
-}
-
 var dateFormat = "2006-01"
 
-func readCSV(reader *csv.Reader) []network {
+func parseDate(date string) (output string) {
+	if t, err := time.Parse(dateFormat, date); err == nil {
+		output = fmt.Sprintf("%d, %d", t.Unix(), t.UnixNano())
+	}
+	return
+}
+
+func readCSV(filename string) []network {
+	f, err := os.Open(filename)
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+	defer f.Close()
+	reader := csv.NewReader(f)
 	networks := []network{}
 	records, err := reader.ReadAll()
 	if err != nil {
@@ -67,12 +71,12 @@ func readCSV(reader *csv.Reader) []network {
 		return nil
 	}
 	for i, r := range records {
-		if i == 0 {
+		if i == 0 && r[0] == "Address Block" {
 			continue // skip header
 		}
 		// record structure
 		// Address Block, Name, RFC, Allocation Date, Termination Date, Source, Destination, Forwardable, Global, Reserved-by-Protocol
-		// (sometimes, maybe once, there is an entry with two seperate blocks)
+		// (sometimes, maybe once, there is an entry with two seperate address blocks)
 		for _, block := range strings.Split(stripString(r[0]), ",") {
 			block = strings.Trim(block, " ")
 			_, cidr, err := net.ParseCIDR(block)
@@ -83,14 +87,10 @@ func readCSV(reader *csv.Reader) []network {
 			ip, mask := bytesToString(cidr.IP), bytesToString(cidr.Mask)
 			allocated, terminates := "", ""
 			if r[3] != "" {
-				if t, err := time.Parse(dateFormat, r[3]); err == nil {
-					allocated = fmt.Sprintf("%d, %d", t.Unix(), t.UnixNano())
-				}
+				allocated = parseDate(r[3])
 			}
 			if r[4] != "" {
-				if t, err := time.Parse(dateFormat, r[4]); err == nil {
-					terminates = fmt.Sprintf("%d, %d", t.Unix(), t.UnixNano())
-				}
+				terminates = parseDate(r[4])
 			}
 			attrs := make([]string, 5)
 			for i, attr := range r[5:] {
@@ -119,31 +119,29 @@ func readCSV(reader *csv.Reader) []network {
 }
 
 const generatedCodeWarning = `// DO NOT EDIT BY HAND
-// CODE AUTOMATICALLY GENERATED USING cmd/iana-parser.go`
+// CODE AUTOMATICALLY GENERATED USING cmd/iana-spar-parser.go`
 
 func main() {
-	v6File := "iana-ipv6-special-registry-1.csv"
-	v4File := "iana-ipv4-special-registry-1.csv"
+	v6Filename := flag.String("v6Filename", "iana-ipv6-special-registry-1.csv", "")
+	v4Filename := flag.String("v4Filename", "iana-ipv4-special-registry-1.csv", "")
+	outputFilename := flag.String("output", "networks.go", "")
+	flag.Parse()
 
-	f, err := os.Open(v4File)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	v4Networks := readCSV(csv.NewReader(f))
-	f, err = os.Open(v6File)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	v6Networks := readCSV(csv.NewReader(f))
+	v4Networks := readCSV(*v4Filename)
+	v6Networks := readCSV(*v6Filename)
 
 	t, err := template.ParseFiles("networks.tmpl")
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	buf := bytes.NewBuffer(nil)
+
+	o, err := os.OpenFile(*outputFilename, os.O_TRUNC|os.O_CREATE|os.O_RDWR, os.ModePerm)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer o.Close()
 	data := struct {
 		Warning    string
 		Now        time.Time
@@ -155,10 +153,16 @@ func main() {
 		V4Networks: v4Networks,
 		V6Networks: v6Networks,
 	}
-	err = t.Execute(buf, data)
+	err = t.Execute(o, data)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println(buf.String())
+	// format output with `go fmt`
+	cmd := exec.Command("gofmt", "-w", *outputFilename)
+	err = cmd.Run()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 }
