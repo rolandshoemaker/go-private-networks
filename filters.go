@@ -1,28 +1,9 @@
-package specialNetworks
+package ianasparlist
 
 import (
 	"net"
 	"time"
 )
-
-// Network describes a special v4/6 network
-// according to the IANA Special-Purpose Address
-// Registries
-type Network struct {
-	CIDR net.IPNet
-
-	Comment string
-	RFC     string
-
-	Allocated  time.Time
-	Terminates time.Time
-
-	Source             bool
-	Destination        bool
-	Forwardable        bool
-	Global             bool
-	ReservedByProtocol bool
-}
 
 func filterBadDestinations(networks []Network) []net.IPNet {
 	filtered := []net.IPNet{}

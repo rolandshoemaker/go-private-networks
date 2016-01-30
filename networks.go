@@ -1,13 +1,31 @@
 // DO NOT EDIT BY HAND
-// CODE AUTOMATICALLY GENERATED USING cmd/iana-parser.go
-// Generated 2016-01-29 01:52:35.823065026 +0000 UTC
+// CODE AUTOMATICALLY GENERATED USING cmd/iana-spar-parser.go
+// Generated 2016-01-30 01:53:05.126206895 +0000 UTC
 
-package specialNetworks
+package ianasparlist
 
 import (
 	"net"
 	"time"
 )
+
+// Network describes a special v4/6 network according as
+// described by the IANA Special-Purpose Address Registry lists
+type Network struct {
+	CIDR net.IPNet
+
+	Comment string
+	RFC     string
+
+	Allocated  time.Time
+	Terminates time.Time
+
+	Source             bool
+	Destination        bool
+	Forwardable        bool
+	Global             bool
+	ReservedByProtocol bool
+}
 
 var (
 	V4 = []Network{
