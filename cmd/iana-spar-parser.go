@@ -51,7 +51,7 @@ var dateFormat = "2006-01"
 
 func parseDate(date string) (output string) {
 	if t, err := time.Parse(dateFormat, date); err == nil {
-		output = fmt.Sprintf("%d, %d", t.Unix(), t.UnixNano())
+		output = fmt.Sprintf("%d, 0", t.Unix())
 	}
 	return
 }
