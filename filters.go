@@ -1,29 +1,28 @@
 package ianasparlist
 
 import (
-	"net"
 	"time"
 )
 
-func filterBadDestinations(networks []Network) []net.IPNet {
-	filtered := []net.IPNet{}
+func filterBadDestinations(networks []Network) []Network {
+	filtered := []Network{}
 	now := time.Now()
 	for _, network := range networks {
-		if (!network.Destination || (network.Destination && !network.Global)) && (network.Terminates.IsZero() || !now.After(network.Terminates)) {
-			filtered = append(filtered, network.CIDR)
+		if network.Comment != "IPv4-mapped Address" && (!network.Destination || (network.Destination && !network.Global)) && (network.Terminates.IsZero() || !now.After(network.Terminates)) {
+			filtered = append(filtered, network)
 		}
 	}
 	return filtered
 }
 
-func InvalidPublicV4Destinations() []net.IPNet {
+func InvalidPublicV4Destinations() []Network {
 	return filterBadDestinations(V4)
 }
 
-func InvalidPublicV6Destinations() []net.IPNet {
+func InvalidPublicV6Destinations() []Network {
 	return filterBadDestinations(V6)
 }
 
-func InvalidPublicDestinations() []net.IPNet {
+func InvalidPublicDestinations() []Network {
 	return append(filterBadDestinations(V4), filterBadDestinations(V6)...)
 }
